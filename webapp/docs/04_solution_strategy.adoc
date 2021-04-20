@@ -21,6 +21,7 @@ de un mapa interactivo, con la cual tenemos mayor experiencia y simplificará es
 * https://es.reactjs.org/[React]: Librería de Javascript que proporciona facilidades en el diseño de interfaces.
 * https://github.com/[GitHub]: Tecnología de control de versiones recomendada para el trabajo cooperativo.
 * https://www.openstreetmap.org/[OpenStreetMap] https://wiki.openstreetmap.org/wiki/API[API]: Proyecto de creación de mapas interactivos y editables.
+* https://www.mongodb.com/cloud/atlas/[MongoDbAtlas] : Base de datos MongoDb Atlas.
 
 === Motivaciones
 Todas estas tecnologías a las que nos adaptaremos nos ayudarán a mejorar como programadores y desarrolladores de aplicaciones y nos permitirá 

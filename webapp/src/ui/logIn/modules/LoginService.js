@@ -1,24 +1,24 @@
 import FileClient from "solid-file-client";
-import auth, { handleIncomingRedirect,logout, login, register, getDefaultSession } from "@inrupt/solid-client-authn-browser";
-//permite logearse ya sea por proveedor como por webId
+import auth, { Session,logout, login, getDefaultSession} from "@inrupt/solid-client-authn-browser";
+import { getSolidDataset, saveSolidDatasetAt } from "@inrupt/solid-client";
 async function Login(provider, webId) {
-    await handleIncomingRedirect();
-    const exist = await existWebId(webId);
     const size = String(webId).length;
-    if (exist && size > 0) {
+    if (size > 0) {
         //alert("Valido " + webId);
         provider = getProvider(webId);
-        //await auth.login(provider);
-        await LoginWithProvider(provider);
+        await LoginWithProvider(provider).then( ()=>
+            auth.login(provider));
     }
     else if (size === parseInt(0)) {
         //alert("WebId vacio " + webId);
-        //await auth.login(provider);
-        await LoginWithProvider(provider);
+        await LoginWithProvider(provider).then( ()=> auth.login(provider));
+
     }
     else {
         alert("WebID invalido: " + webId);
     }
+   
+    
 }
 //comprueba que existe ese webId en los diferentes pods
 async function existWebId(webId) {
@@ -28,6 +28,7 @@ async function existWebId(webId) {
         return await op(fc);
     }
     catch (e) {
+        console.log(e)
         return false;
     }
 }
@@ -40,19 +41,21 @@ function getProvider(webId) {
         alert(provider);
         return provider;
     }
+    else{
+        alert("WebID invalido: "+webId)
+    }
     return webId
 }
 //te logea pro proveedor
 async function LoginWithProvider(provider) {
-    if (!getDefaultSession().info.isLoggedIn) {
-        await login({
+
+    var not = new Notification("Bienvenido!!"); //mostramos un mensaje de bienvenida 
+    setTimeout(not.close, 3000);
+    const session= new Session()
+    await session.login({
             oidcIssuer: provider,
             redirectUrl: window.location.href
-        });
-    }
-    else {
-        alert(`Logged in as ${getDefaultSession().info.webId}`)
-    }
+    })
 
 }
 //permite registrarte en el proveedor escogido
@@ -60,7 +63,8 @@ const Register = async (provider) => {
     
 }
 
-const Logout = async () =>{
+const Logout = async () => {
     logout({ returnTo: window.location.origin });
 }
+
 export { Login, Register, Logout }

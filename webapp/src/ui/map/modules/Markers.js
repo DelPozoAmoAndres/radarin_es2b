@@ -1,6 +1,7 @@
 // External dependences
 import { Marker, Popup } from 'react-leaflet';
-import { divIcon } from 'leaflet';
+import { divIcon,latLng, CRS  } from 'leaflet';
+
 
 const blue = '#004B87';
 const yellow = '#FFCD00';
@@ -45,4 +46,8 @@ export function getMarkers(users) {
         colour = blue;
     });
     return usersMarkers;
+}
+
+export function calcularDistancia(lat1, lng1, lat2, lng2) {
+    return CRS.Earth.distance(latLng(lat1, lng1), latLng(lat2, lng2));
 }

@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Dependences from: ~/ui/logIn/modules
-import "../logIn.css"
+import "../LogIn.css"
 
 function WebId(props) {
     return (

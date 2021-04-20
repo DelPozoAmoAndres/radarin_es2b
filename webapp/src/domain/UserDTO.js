@@ -14,6 +14,10 @@ export class UserDTO {
         this.longitude = props.longitude;
     }
 
+    getCoordinates() {
+        return { latitude: this.latitude, longitude: this.longitude };
+    }
+
     getLatLng() {
         if (this.latitude == null || this.longitude == null)
             return latLng(0.0, 0.0);

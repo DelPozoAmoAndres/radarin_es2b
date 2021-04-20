@@ -8,9 +8,11 @@
 
 [plantuml, {plantUMLDir}iniciarSesion, svg]
 ----
+@startuml
 actor Usuario
 participant Interfaz_Grafica
 participant Pop_Up_Login
+database Base_De_Datos
 database Pod
 Usuario -> Interfaz_Grafica: Login
 Interfaz_Grafica -> Pop_Up_Login: Abrir PopUp
@@ -19,7 +21,10 @@ Usuario -> Pop_Up_Login: Introducir datos para iniciar sesión
 Pop_Up_Login -> Pod: Solicitud inicio de sesión
 
 Pod -> Pop_Up_Login: Inicio de sesion incorrecto
-Pod -> Interfaz_Grafica: Inicio de sesión correcto
+Pod -> Interfaz_Grafica: Inicio de sesion correcto
+
+Interfaz_Grafica-> Base_De_Datos: Comprueba si el usuario esta en base y si no lo añade
+@enduml
 ----
 
 === Añadir un amigo
@@ -29,21 +34,25 @@ Pod -> Interfaz_Grafica: Inicio de sesión correcto
 
 [plantuml, {plantUMLDir}añadirAmigos, svg]
 ----
+@startuml
 actor Usuario
 participant Interfaz_Grafica
 participant Pop_Up_AddFriends
+database Base_De_Datos
 database Pod
 database PodAmigo
 Usuario -> Interfaz_Grafica: Añadir amigo
 Interfaz_Grafica -> Pop_Up_AddFriends: Abrir PopUp
 Usuario -> Pop_Up_AddFriends: Introducir nombre de usuario de tu amigo
+Pop_Up_AddFriends -> Base_De_Datos: Buscas el webid del amigo 
+Base_De_Datos-> Pod : Preparar solicitud con el nombre de usuario
 
-Pop_Up_AddFriends -> Pod: Preparar solicitud con el nombre de usuario
 Pod -> PodAmigo: Solicitud de amistad
 Pod <- PodAmigo: Solicitud aceptada
 Pod -> Pod: Se añade al amigo
 Pod -> Interfaz_Grafica: Devuelve los amigos
 Interfaz_Grafica -> Interfaz_Grafica: Muestra los amigos
+@enduml
 ----
 
 

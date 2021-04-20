@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { SessionProvider } from '@inrupt/solid-ui-react';
+import { SessionProvider } from "@inrupt/solid-ui-react";
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <SessionProvider sessionId="log-in-example">
+    <SessionProvider>
       <App />
     </SessionProvider>
   </React.StrictMode>,

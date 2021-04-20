@@ -6,7 +6,8 @@ const UsuariosSchema = new Schema ({
         type: String,
         unique: true
     },
-    coordinates : String
+    coordinates : String,
+    estadoCuenta : String
 });
 
 module.exports = model('Usuarios',UsuariosSchema);

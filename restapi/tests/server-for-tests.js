@@ -29,6 +29,7 @@ module.exports.startserver = async () => {
     app.use(express.json())
     app.use("/api", api)
 
+    
     server = await app.listen(5000)
     console.log("Server has started!")
     return app

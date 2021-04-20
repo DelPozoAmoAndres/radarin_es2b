@@ -7,8 +7,8 @@ class ServicesFactory {
         return new CurrentUserService();
     }
 
-    static forFriendUsers() {
-        return new FriendsService();
+    static forFriendUsers(webId) {
+        return new FriendsService(webId);
     }
 }
 
